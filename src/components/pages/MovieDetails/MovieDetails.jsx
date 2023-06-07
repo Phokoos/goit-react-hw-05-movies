@@ -1,8 +1,11 @@
 import { fetchToApiUseFilmId } from 'api/api';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useLocation, useParams, Link, Outlet } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 
 const MovieDetails = () => {
+  const location = useLocation();
+  const backLinkRef = useRef(location?.state ?? '/movies');
+
   const { movieId } = useParams();
 
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -11,7 +14,6 @@ const MovieDetails = () => {
     const array = fetchToApiUseFilmId(movieId).then(data => data);
 
     array.then(data => {
-      console.log(data);
       setTrendingMovies(data);
     });
   }, [movieId]);
@@ -19,7 +21,11 @@ const MovieDetails = () => {
   return (
     <div>
       MovieDetails
+      <Link to={backLinkRef.current}>Go back</Link>
       <h2>{trendingMovies.title}</h2>
+      <Link to={'cast'}>Cast</Link>
+      <Link to={'reviews'}>Reviews</Link>
+      <Outlet />
     </div>
   );
 };

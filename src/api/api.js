@@ -31,18 +31,20 @@ export const fetchToApiUseFilmId = async (filmId) => {
 }
 
 export const fetchToApiUseFilmIdToSeeCredits = async (filmId) => {
-	fetch(`https://api.themoviedb.org/3/movie/${filmId}/credits?language=en-US`, options)
+	const data = await fetch(`https://api.themoviedb.org/3/movie/${filmId}/credits?language=en-US`, options)
 		.then(response => response.json())
-		.then(response => console.log(response))
+		.then(response => { return response })
 		.catch(err => console.error(err));
+	return data;
 
 }
 
 export const fetchToApiUseFilmIdToSeeReviews = async (filmId) => {
-	fetch(`https://api.themoviedb.org/3/movie/${filmId}/reviews?language=en-US&page=1`, options)
+	const data = await fetch(`https://api.themoviedb.org/3/movie/${filmId}/reviews?language=en-US&page=1`, options)
 		.then(response => response.json())
-		.then(response => console.log(response))
+		.then(response => { return response })
 		.catch(err => console.error(err));
+	return data;
 
 }
 

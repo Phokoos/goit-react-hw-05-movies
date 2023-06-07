@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchToApiUseName } from 'api/api';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
+  const [searchingMovies, setSearchingMovies] = useState([]);
   const [searchingValue, setSearchingValue] = useState('');
 
-  const [searchingMovies, setSearchingMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const location = useLocation();
 
   const handleChange = event => {
     event.preventDefault();
@@ -15,18 +18,29 @@ const Movies = () => {
 
   const searchBtnClick = event => {
     event.preventDefault();
-    const array = fetchToApiUseName(searchingValue).then(data => data);
 
-    array.then(data => {
-      console.log(data.results);
-      setSearchingMovies(data.results);
+    setSearchParams({
+      search: `${searchingValue}`,
     });
   };
 
-  const test = movie => {
-    // console.log('work' + movie);
-    console.log(movie.id);
-  };
+  useEffect(() => {
+    if (searchParams.get('search')) {
+      const array = fetchToApiUseName(searchParams.get('search')).then(
+        data => data
+      );
+
+      array.then(data => {
+        setSearchingMovies(data.results);
+      });
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (searchParams.get('search')) {
+      setSearchingValue(searchParams.get('search'));
+    }
+  }, [searchParams]);
 
   return (
     <div>
@@ -45,15 +59,12 @@ const Movies = () => {
       <ul>
         {searchingMovies.map(movie => (
           <li key={movie.id}>
-            <Link to={`${movie.id}`}>{movie.title}</Link>
+            <Link to={`${movie.id}`} state={location}>
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>
-      {/* {searchingMovies.map(movie => (
-        <Link onClick={test(movie)} to={`${movie.id}`} key={movie.id}>
-          {movie.title}
-        </Link>
-      ))} */}
     </div>
   );
 };
