@@ -15,7 +15,6 @@ const Reviews = () => {
 
     array.then(data => {
       setMoviesCast(data.results);
-      console.log(data.results);
     });
   }, [params.movieId]);
 
