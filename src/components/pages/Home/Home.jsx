@@ -1,6 +1,7 @@
 import { fetchToApiTrending } from 'api/api';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import css from './Home.module.css';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -11,17 +12,16 @@ const Home = () => {
     const array = fetchToApiTrending().then(data => data);
 
     array.then(data => {
-      console.log(data.results);
       setTrendingMovies(data.results);
     });
   }, []);
 
   return (
-    <div>
-      <h1>Trending movies</h1>
-      <ul>
+    <div className={css.home}>
+      <h1 className={css.home_title}>Trending movies</h1>
+      <ul className={css.home_list}>
         {trendingMovies.map(movie => (
-          <li key={movie.id}>
+          <li className={css.home_item} key={movie.id}>
             <Link state={location} to={`movies/${movie.id}`}>
               {movie.title}
             </Link>

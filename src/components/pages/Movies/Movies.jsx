@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { fetchToApiUseName } from 'api/api';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import css from './Movies.module.css';
 
 const Movies = () => {
   const [searchingMovies, setSearchingMovies] = useState([]);
   const [searchingValue, setSearchingValue] = useState('');
-
   const [searchParams, setSearchParams] = useSearchParams();
-
   const location = useLocation();
 
   const handleChange = event => {
@@ -43,10 +42,11 @@ const Movies = () => {
   }, [searchParams]);
 
   return (
-    <div>
-      <form action="submit" onSubmit={searchBtnClick}>
+    <div className={css.movies}>
+      <form className={css.form} action="submit" onSubmit={searchBtnClick}>
         <label>
           <input
+            className={css.form_input}
             onChange={handleChange}
             value={searchingValue}
             type="text"
@@ -54,11 +54,13 @@ const Movies = () => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           />
         </label>
-        <button type="submit">Search</button>
+        <button className={css.form_submit} type="submit">
+          Search
+        </button>
       </form>
-      <ul>
+      <ul className={css.movies_list}>
         {searchingMovies.map(movie => (
-          <li key={movie.id}>
+          <li className={css.movies_item} key={movie.id}>
             <Link to={`${movie.id}`} state={location}>
               {movie.title}
             </Link>

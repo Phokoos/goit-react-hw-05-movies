@@ -1,0 +1,24 @@
+.cast_title {
+	margin: 0;
+	font-size: 24px;
+}
+
+.cast_list {
+	padding: 0;
+}
+
+.cast_item {
+	margin-bottom: 5px;
+
+	display: flex;
+	gap: 20px;
+}
+
+.cast_img {
+	width: 100px;
+}
+
+.cast_desc_actor {
+	font-size: 18px;
+	font-weight: bold;
+}

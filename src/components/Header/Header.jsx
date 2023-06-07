@@ -1,13 +1,34 @@
 import { NavLink } from 'react-router-dom';
+import css from './Header.module.css';
 
 const Header = () => {
   return (
-    <nav>
-      <div>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/movies">Movies</NavLink>
-      </div>
-    </nav>
+    <div className={css.header}>
+      <nav className={css.nav}>
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              color: isActive ? 'red' : 'black',
+              fontSize: '24px',
+            };
+          }}
+          to="/"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              color: isActive ? 'red' : 'black',
+              fontSize: '24px',
+            };
+          }}
+          to="/movies"
+        >
+          Movies
+        </NavLink>
+      </nav>
+    </div>
   );
 };
 

@@ -1,0 +1,65 @@
+.movie {
+	padding: 10px;
+	padding-top: 0;
+}
+
+.movie_main_title {
+	margin: 0 0 10px 0;
+
+	font-size: 26px;
+}
+
+.movie_card {
+	display: flex;
+	gap: 20px;
+}
+
+.movie_img {
+	width: 300px;
+}
+
+.movie_title {
+	margin: 0 0 5px 0;
+	font-size: 24px;
+}
+
+.movie_subtitle {
+	margin: 0 0 5px 0;
+
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.movie_text {
+	margin: 0;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.movie_genres {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.movie_genres_item {
+	font-size: 16px;
+}
+
+.movie_additional_title {
+	margin: 10px 0 5px 0;
+	font-size: 20px;
+}
+
+.movie_additional_list a {
+	font-size: 18px;
+}
+
+.movie_additional_list {
+	margin: 0;
+	margin-bottom: 10px;
+}

@@ -1,11 +1,10 @@
 import { fetchToApiUseFilmIdToSeeReviews } from 'api/api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import css from './Reviews.module.css';
 
 const Reviews = () => {
   const params = useParams();
-
-  console.log(params);
 
   const [moviesCast, setMoviesCast] = useState([]);
 
@@ -15,19 +14,28 @@ const Reviews = () => {
     );
 
     array.then(data => {
-      // console.log(data.results);
       setMoviesCast(data.results);
+      console.log(data.results);
     });
   }, [params.movieId]);
 
   return (
     <div>
-      REVIEWS
-      <ul>
-        {moviesCast.map(review => (
-          <li key={review.id}>{review.author}</li>
-        ))}
-      </ul>
+      <h4 className={css.reviews_title}>Reviews: </h4>
+      {moviesCast.length ? (
+        <ul className={css.reviews_list}>
+          {moviesCast.map(review => (
+            <li key={review.id}>
+              <p className={css.reviews_author}>Author: {review.author}</p>
+              <p className={css.reviews_feedback}>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className={css.reviews_error}>
+          We don`t have any reviews for this movie!
+        </div>
+      )}
     </div>
   );
 };
